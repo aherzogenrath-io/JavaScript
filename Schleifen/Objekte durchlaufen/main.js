@@ -36,3 +36,4 @@ for (let w of werte) {
 };
 
 console.log("test");
+// just a comment
