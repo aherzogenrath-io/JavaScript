@@ -34,3 +34,5 @@ console.log(werte);
 for (let w of werte) {
     console.log(w);
 };
+
+console.log("test");
