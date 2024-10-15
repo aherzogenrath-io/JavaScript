@@ -29,21 +29,26 @@ const haushaltsbuch = {
     },
     eintrag_hinzufuegen () {
         this.eintrag_erfassen();
+        this.eintrag_ausgeben();
+    },
+    // loopt über array mit for each --> für jeden Eintrag Console.log
+    eintrag_ausgeben() {
+        console.clear();
+        this.eintraege.forEach(function(eintrag) {
+         console.log(`Titel: ${eintrag.titel}\n`
+                + `Typ: ${eintrag.typ}\n`
+                + `Betrag: ${eintrag.betrag} ct\n`
+                + `Datum: ${eintrag.datum}\n`
+            );
+        })
     }
-}
 
+}
+haushaltsbuch.eintrag_hinzufuegen();
+haushaltsbuch.eintrag_hinzufuegen();
 haushaltsbuch.eintrag_hinzufuegen();
 console.log(haushaltsbuch);
 
-
-
-//     eintrag_ausgeben() {
-//          console.log(`Titel: ${this.neuer_eintrag.titel}
-// Typ: ${this.neuer_eintrag.typ}
-// Betrag: ${this.neuer_eintrag.betrag} ct
-// Datum: ${this.neuer_eintrag.datum}`
-//         )
-//     },
 
 //     eintrag_mit_gesamtbilanz_verrechnen() {
 //         switch (this.neuer_eintrag.typ) {
@@ -75,6 +80,5 @@ console.log(haushaltsbuch);
 
 // };
 
-// haushaltsbuch.eintrag_hinzufuegen();
 // haushaltsbuch.eintrag_hinzufuegen();
 // haushaltsbuch.eintrag_hinzufuegen();
