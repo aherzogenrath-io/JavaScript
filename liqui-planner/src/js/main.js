@@ -6,14 +6,7 @@ const haushaltsbuch = {
         ausgaben: 0,
         bilanz: 0
     },
-
-
-
-
-// Eigenschaft einträge --> array immer wenn neuer eintrag
-// --> neues objekt (titel,typ,betrag,datum) --> in array
-
-
+// Einträge werden durch prompts erfasst und in das Array eintraege gepusht
     eintraege: [],
 
     eintrag_erfassen() {
@@ -27,11 +20,9 @@ const haushaltsbuch = {
             }
         );
     },
-    eintrag_hinzufuegen () {
-        this.eintrag_erfassen();
-        this.eintrag_ausgeben();
-    },
-    // loopt über array mit for each --> für jeden Eintrag Console.log
+
+// loop mit der forEach function über jeden eintrag und gibt diesen
+// als console.log aus
     eintrag_ausgeben() {
         console.clear();
         this.eintraege.forEach(function(eintrag) {
@@ -40,31 +31,40 @@ const haushaltsbuch = {
                 + `Betrag: ${eintrag.betrag} ct\n`
                 + `Datum: ${eintrag.datum}\n`
             );
-        })
+        });
+    },
+// loop durch jeden Eintrag und switch-case für die jeweiligen
+// typen mit der jeweiligen berechnung in neue_gesamtbilanz
+    gesamtbilanz_erstellen() {
+        let neue_gesamtbilanz = {
+            einnahmen : 0,
+            ausgaben: 0,
+            bilanz: 0
+        };
+        this.eintraege.forEach(function(eintrag) {
+        switch (eintrag.typ) {
+            case "Einnahme":
+                neue_gesamtbilanz.einnahmen += eintrag.betrag;
+                neue_gesamtbilanz.bilanz += eintrag.betrag;
+                break;
+            case "Ausgabe":
+                neue_gesamtbilanz.ausgaben += eintrag.betrag;
+                neue_gesamtbilanz.bilanz -= eintrag.betrag;
+                break;
+            default:
+                console.log(`der Typ "${eintrag.typ}" ist nicht bekannt`);
+                break;
+        }
+    });
+    // gesamtbilanz mit den Werten aus neue_gesamtbilanz füllen
+        this.gesamtbilanz = neue_gesamtbilanz;
+    },
+    eintrag_hinzufuegen () {
+        this.eintrag_erfassen();
+        this.eintrag_ausgeben();
+        this.gesamtbilanz_erstellen();
     }
-
-}
-haushaltsbuch.eintrag_hinzufuegen();
-haushaltsbuch.eintrag_hinzufuegen();
-haushaltsbuch.eintrag_hinzufuegen();
-console.log(haushaltsbuch);
-
-
-//     eintrag_mit_gesamtbilanz_verrechnen() {
-//         switch (this.neuer_eintrag.typ) {
-//             case "Einnahme":
-//                 this.gesamtbilanz.einnahmen += this.neuer_eintrag.betrag;
-//                 this.gesamtbilanz.bilanz += this.neuer_eintrag.betrag;
-//                 break;
-//             case "Ausgabe":
-//                 this.gesamtbilanz.ausgaben += this.neuer_eintrag.betrag;
-//                 this.gesamtbilanz.bilanz -= this.neuer_eintrag.betrag;
-//                 break;
-//             default:
-//                 console.log(`der Typ "${this.neuer_eintrag.typ}" ist nicht bekannt`);
-//                 break;
-//         }
-//         },
+};
 
 //     gesamtbilanz_ausgeben() {
 //         console.log(`Einnahmen: ${this.gesamtbilanz.einnahmen} ct
@@ -75,10 +75,7 @@ console.log(haushaltsbuch);
 
 
 
-
-
-
-// };
-
-// haushaltsbuch.eintrag_hinzufuegen();
-// haushaltsbuch.eintrag_hinzufuegen();
+haushaltsbuch.eintrag_hinzufuegen();
+haushaltsbuch.eintrag_hinzufuegen();
+haushaltsbuch.eintrag_hinzufuegen();
+console.log(haushaltsbuch.gesamtbilanz);
