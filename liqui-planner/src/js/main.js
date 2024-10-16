@@ -59,23 +59,28 @@ const haushaltsbuch = {
     // gesamtbilanz mit den Werten aus neue_gesamtbilanz füllen
         this.gesamtbilanz = neue_gesamtbilanz;
     },
+
+    gesamtbilanz_ausgeben() {
+        console.log(`Einnahmen: ${this.gesamtbilanz.einnahmen} ct\n`
+            + `Ausgaben: ${this.gesamtbilanz.ausgaben} ct\n`
+            + `Bilanz: ${this.gesamtbilanz.bilanz} ct\n`
+            + `Bilanz ist positiv: ${this.gesamtbilanz.bilanz >= 0}\n`)
+    },
+
     eintrag_hinzufuegen () {
-        this.eintrag_erfassen();
-        this.eintrag_ausgeben();
-        this.gesamtbilanz_erstellen();
-    }
+        let weiterer_eintrag = true;
+        while (weiterer_eintrag) {
+            this.eintrag_erfassen();
+            this.eintrag_ausgeben();
+            this.gesamtbilanz_erstellen();
+            this.gesamtbilanz_ausgeben();
+            weiterer_eintrag = confirm("Weiteren Eintrag hinzufügen?");
+        };
+
+
+    },
+
 };
-
-//     gesamtbilanz_ausgeben() {
-//         console.log(`Einnahmen: ${this.gesamtbilanz.einnahmen} ct
-// Ausgaben: ${this.gesamtbilanz.ausgaben} ct
-// Bilanz: ${this.gesamtbilanz.bilanz} ct
-// Bilanz ist positiv: ${this.gesamtbilanz.bilanz >= 0}`)
-//     },
-
-
-
 haushaltsbuch.eintrag_hinzufuegen();
-haushaltsbuch.eintrag_hinzufuegen();
-haushaltsbuch.eintrag_hinzufuegen();
-console.log(haushaltsbuch.gesamtbilanz);
+
+console.log(haushaltsbuch);
