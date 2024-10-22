@@ -21,6 +21,18 @@ const haushaltsbuch = {
         );
     },
 
+    eintraege_sortieren() {
+        this.eintraege.sort(function(eintrag_a, eintrag_b) {
+            if (eintrag_a.datum > eintrag_b.datum) {
+                return -1;
+            } else if (eintrag_a.datum < eintrag_b.datum) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    },
+
 // loop mit der forEach function über jeden eintrag und gibt diesen
 // als console.log aus
     eintrag_ausgeben() {
@@ -71,6 +83,7 @@ const haushaltsbuch = {
         let weiterer_eintrag = true;
         while (weiterer_eintrag) {
             this.eintrag_erfassen();
+            this.eintraege_sortieren();
             this.eintrag_ausgeben();
             this.gesamtbilanz_erstellen();
             this.gesamtbilanz_ausgeben();
@@ -81,6 +94,8 @@ const haushaltsbuch = {
     },
 
 };
+
+
 haushaltsbuch.eintrag_hinzufuegen();
 
 console.log(haushaltsbuch);
